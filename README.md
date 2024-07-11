@@ -1,5 +1,6 @@
-# Industrial Scale Data Poisoning
+# Industrial Scale Data Poisoning (branch)
 
+This is based on https://github.com/JonasGeiping/data-poisoning
 
 This framework implements data poisoning strategies that reliably apply imperceptible adversarial patterns to training data. If this training data is later used to train an entirely new model, this new model will misclassify specific target images.
 
