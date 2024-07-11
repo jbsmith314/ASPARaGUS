@@ -138,6 +138,6 @@ def options():
                                                                      'Only the launch utility should set this argument!')
     
     # I added
-    parser.add_argument("--save_weights", action='store_true')
+    parser.add_argument("--save_weights", default=None, type=str, choices=['timed', 'untimed'])
 
     return parser

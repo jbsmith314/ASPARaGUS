@@ -108,7 +108,7 @@ class _VictimSingle(_VictimBase):
         single_setup = (self.model, self.defs, self.optimizer, self.scheduler)
         for self.epoch in range(max_epoch):
             self._step(kettle, poison_delta, self.epoch, stats, *single_setup, pretraining_phase)
-            if self.args.save_weights: # Make a save_weights argument, and have this check it
+            if self.args.save_weights is not None: # Make a save_weights argument, and have this check it
                 start_time = time.time()
                 if poison_delta is None:
                     save_name = ''
@@ -120,9 +120,8 @@ class _VictimSingle(_VictimBase):
                 print(f'Attempting to save weights as "{save_name}"')
                 torch.save(self.model.state_dict(), os.path.join(clean_path, f'{save_name}')) # Save weights after every epoch
                 end_time = time.time()
-                for _ in range(40):
-                    print('------------------------------------------------------------------------------------')
-                print(f'Took {str(datetime.timedelta(seconds=end_time - start_time))}')
+		if self.args.save_weights == 'timed':
+                    print(f'Took {str(datetime.timedelta(seconds=end_time - start_time))}')
             if self.args.dryrun:
                 break
         return stats
