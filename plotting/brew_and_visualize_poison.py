@@ -11,7 +11,8 @@ import numpy as np
 import pickle
 
 import sys
-sys.path.append('/data/breu24/repos/data-poisoning')
+sys.path.append('/data/breu24/repos/ASPARaGUS')
+sys.path.append('/home/breu24/repos/ASPARaGUS')
 import forest
 from forest.filtering_defenses import get_defense
 torch.backends.cudnn.benchmark = forest.consts.BENCHMARK
@@ -82,11 +83,15 @@ if __name__ == "__main__":
 
     torch.save(model.model.state_dict(), os.path.join(clean_path, 'clean.pth'))
     model.model.eval()
+    
+    if args.only_clean_training:
+        sys.exit()
+    
     feats, targets, indices = get_features(model, data, poison_delta=None)
     with open(os.path.join(clean_path, 'clean_features.pickle'), 'wb+') as file:
         pickle.dump([feats, targets, indices], file, protocol=pickle.HIGHEST_PROTOCOL)
     model.model.train()
-
+    
     poison_delta = witch.brew(model, data)
     brew_time = time.time()
     with open(os.path.join(subfolder, 'poison_indices.pickle'), 'wb+') as file:
