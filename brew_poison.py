@@ -20,6 +20,7 @@ import torch
 
 import datetime
 import time
+import sys
 
 import forest
 from forest.filtering_defenses import get_defense
@@ -53,6 +54,8 @@ if __name__ == "__main__":
     else:
         stats_clean = model.train(data, max_epoch=args.max_epoch)
     train_time = time.time()
+    if args.only_clean_training:
+        sys.exit()
 
     poison_delta = witch.brew(model, data)
     brew_time = time.time()
