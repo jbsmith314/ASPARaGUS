@@ -11,7 +11,7 @@ import numpy as np
 import pickle
 
 import sys
-sys.path.append('/data/breu24/repos/data-poisoning')
+sys.path.append('/data/breu24/repos/ASPARaGUS')
 import forest
 from forest.filtering_defenses import get_defense
 torch.backends.cudnn.benchmark = forest.consts.BENCHMARK
