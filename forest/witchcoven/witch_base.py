@@ -297,7 +297,8 @@ class _Witch():
                 # Return slice to CPU:
                 poison_delta[poison_slices] = delta_slice.detach().to(device=torch.device('cpu'))
             elif self.args.attackoptim in ['Adam', 'signAdam', 'momSGD', 'momPGD']:
-                print(torch.device('cpu'))
+                print(poison_delta.grad[poison_slices].shape)
+                print(delta_slice.grad.detach().to(device=torch.device('cpu')).shape)
                 poison_delta.grad[poison_slices] = delta_slice.grad.detach().to(device=torch.device('cpu'))
                 poison_bounds[poison_slices] = poison_images.detach().to(device=torch.device('cpu'))
             else:
