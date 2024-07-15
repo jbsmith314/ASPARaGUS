@@ -10,7 +10,7 @@ from .mobilenet import MobileNetV2
 from .vgg import VGG
 
 
-def get_model(model_name, dataset_name, pretrained=False):
+def get_model(model_name, dataset_name, pretrained=False, load_model=False):
     """Retrieve an appropriate architecture."""
     if 'CIFAR' in dataset_name or 'MNIST' in dataset_name:
         if pretrained:
@@ -19,6 +19,14 @@ def get_model(model_name, dataset_name, pretrained=False):
         num_classes = 10 if dataset_name in ['CIFAR10', 'MNIST'] else 100
         if 'ResNet' in model_name:
             model = resnet_picker(model_name, dataset_name)
+            if load_model:
+                state_dict = torch.load(load_model)['state_dict']
+                new_state_dict = OrderedDict()
+                for k, v in state_dict.items():
+                    name = k[7:] # remove module. from the start of each key
+                    new_state_dict[name] = v
+                model.load_state_dict(new_state_dict)
+                return model
         elif 'efficientnet-b' in model_name.lower():
             from efficientnet_pytorch import EfficientNet
             model = EfficientNet.from_name(model_name.lower())

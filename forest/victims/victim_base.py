@@ -175,8 +175,9 @@ class _VictimBase:
         else:
             dataset = self.args.dataset
 
-        model = get_model(model_name, dataset, pretrained=self.args.pretrained_model)
+        model = get_model(model_name, dataset, pretrained=self.args.pretrained_model, load_model=self.args.load_model)
         model.frozen = False
+
         # Define training routine
         defs = training_strategy(model_name, self.args)
         optimizer, scheduler = get_optimizers(model, self.args, defs)

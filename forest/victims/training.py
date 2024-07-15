@@ -167,7 +167,11 @@ def run_step(kettle, poison_delta, epoch, stats, model, defs, optimizer, schedul
         predictions, valid_loss = None, None
         target_acc, target_loss, target_clean_acc, target_clean_loss = [None] * 4
 
-    current_lr = optimizer.param_groups[0]['lr']
+    if kettle.args.constantlr:
+        current_lr = kettle.args.lr
+    else:
+        current_lr = optimizer.param_groups[0]['lr']
+
     print_and_save_stats(epoch, stats, current_lr, epoch_loss / (batch + 1), correct_preds / total_preds,
                          predictions, valid_loss,
                          target_acc, target_loss, target_clean_acc, target_clean_loss)

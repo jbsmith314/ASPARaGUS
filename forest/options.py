@@ -140,5 +140,6 @@ def options():
     parser.add_argument("--save_weights", default=None, type=str, choices=['timed', 'untimed'])
     parser.add_argument("--only_clean_training", action='store_true')
     parser.add_argument("--load_model", default=None, type=str)
+    parser.add_argument("--constantlr", action='store_true')
 
     return parser

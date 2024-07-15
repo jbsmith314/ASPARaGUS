@@ -79,15 +79,15 @@ if __name__ == "__main__":
         stats_clean = None
     else:
         stats_clean = model.train(data, max_epoch=args.max_epoch)
-    train_time = time.time()
 
-    if args.max_epoch is None:
-        epochs = model.defs.epochs
-    else:
-        epochs = args.max_epoch
+        if args.max_epoch is None:
+            epochs = model.defs.epochs
+        else:
+            epochs = args.max_epoch
 
-    state = {'epoch': epochs + 1, 'state_dict': model.model.state_dict(), 'optimizer': model.optimizer.state_dict()}
-    torch.save(state, os.path.join(clean_path, 'clean.pth'))
+        state = {'epoch': epochs + 1, 'state_dict': model.model.state_dict(), 'optimizer': model.optimizer.state_dict()}
+        torch.save(state, os.path.join(clean_path, 'clean.pth'))
+
     model.model.eval()
 
     if args.only_clean_training:
