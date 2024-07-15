@@ -81,17 +81,23 @@ if __name__ == "__main__":
         stats_clean = model.train(data, max_epoch=args.max_epoch)
     train_time = time.time()
 
-    torch.save(model.model.state_dict(), os.path.join(clean_path, 'clean.pth'))
+    if args.max_epoch is None:
+        epochs = model.defs.epochs
+    else:
+        epochs = args.max_epoch
+
+    state = {'epoch': epochs + 1, 'state_dict': model.model.state_dict(), 'optimizer': model.optimizer.state_dict()}
+    torch.save(state, os.path.join(clean_path, 'clean.pth'))
     model.model.eval()
-    
+
     if args.only_clean_training:
         sys.exit()
-    
+
     feats, targets, indices = get_features(model, data, poison_delta=None)
     with open(os.path.join(clean_path, 'clean_features.pickle'), 'wb+') as file:
         pickle.dump([feats, targets, indices], file, protocol=pickle.HIGHEST_PROTOCOL)
     model.model.train()
-    
+
     poison_delta = witch.brew(model, data)
     brew_time = time.time()
     with open(os.path.join(subfolder, 'poison_indices.pickle'), 'wb+') as file:
