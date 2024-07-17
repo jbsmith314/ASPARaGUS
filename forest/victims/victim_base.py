@@ -181,6 +181,8 @@ class _VictimBase:
         # Define training routine
         defs = training_strategy(model_name, self.args)
         optimizer, scheduler = get_optimizers(model, self.args, defs)
+        if self.args.load_model is not None:
+            optimizer.load_state_dict(torch.load(self.args.load_model)['optimizer'])
 
         return model, defs, optimizer, scheduler
 

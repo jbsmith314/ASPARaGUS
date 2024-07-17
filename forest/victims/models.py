@@ -40,6 +40,14 @@ def get_model(model_name, dataset_name, pretrained=False, load_model=False):
             model = ConvNetBN(width=32, in_channels=in_channels, num_classes=num_classes)
         elif model_name == 'Linear':
             model = linear_model(dataset_name, num_classes=num_classes)
+            if load_model:
+                state_dict = torch.load(load_model)['state_dict']
+                new_state_dict = OrderedDict()
+                for k, v in state_dict.items():
+                    name = k[7:] # remove module. from the start of each key
+                    new_state_dict[name] = v
+                model.load_state_dict(new_state_dict)
+                return model
         elif model_name == 'alexnet-mp':
             model = alexnet_metapoison(in_channels=in_channels, num_classes=num_classes, batchnorm=False)
         elif model_name == 'alexnet-mp-bn':
