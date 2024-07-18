@@ -319,4 +319,12 @@ def get_optimizers(model, args, defs):
                                                          milestones=[10_000, 15_000, 25_000], gamma=1)
 
         # Example: epochs=160 leads to drops at 60, 100, 140.
+
+
+    if args.load_model is not None:
+        optimizer.load_state_dict(torch.load(args.load_model)['optimizer'])
+        scheduler.load_state_dict(torch.load(args.load_model)['scheduler'])
+        print("Loading optimizer with state dict: ", optimizer.state_dict())
+        print("Loading scheduler with state dict: ", scheduler.state_dict())
+
     return optimizer, scheduler

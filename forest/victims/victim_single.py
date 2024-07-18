@@ -106,11 +106,12 @@ class _VictimSingle(_VictimBase):
             max_epoch = self.defs.epochs
 
         single_setup = (self.model, self.defs, self.optimizer, self.scheduler)
-        for self.epoch in range(max_epoch):
+
+        for self.epoch in range(self.scheduler.last_epoch, max_epoch + self.scheduler.last_epoch):
             if self.epoch == self.args.save_epoch:
                 subfolder = self.args.modelsave_path
                 clean_path = os.path.join(subfolder, 'clean_model')
-                state = {'epoch': self.epoch + 1, 'state_dict': self.model.state_dict(), 'optimizer': self.optimizer.state_dict(), 'scheduler': self.scheduler}
+                state = {'epoch': self.epoch + 1, 'state_dict': self.model.state_dict(), 'optimizer': self.optimizer.state_dict(), 'scheduler': self.scheduler.state_dict()}
                 torch.save(state, os.path.join(clean_path, f'clean_epoch_{self.epoch}.pth'))
             self._step(kettle, poison_delta, self.epoch, stats, *single_setup, pretraining_phase)
             if self.args.save_weights is not None:

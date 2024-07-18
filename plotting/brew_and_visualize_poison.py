@@ -85,7 +85,12 @@ if __name__ == "__main__":
         else:
             epochs = args.max_epoch
 
-        state = {'epoch': epochs + 1, 'state_dict': model.model.state_dict(), 'optimizer': model.optimizer.state_dict()}
+        state = {'epoch': epochs + 1, 'state_dict': model.model.state_dict(), 'optimizer': model.optimizer.state_dict(), 'scheduler': model.scheduler.state_dict()}
+        if model.defs.scheduler == 'none':
+            for _ in range(epochs):
+                model.scheduler.step()
+        print(f'Saving optimizer with state: {state["optimizer"]}')
+        print(f'Saving scheduler with state: {state["scheduler"]}')
         torch.save(state, os.path.join(clean_path, 'clean.pth'))
 
     model.model.eval()
