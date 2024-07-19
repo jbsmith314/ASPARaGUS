@@ -137,11 +137,10 @@ def options():
     parser.add_argument("--local_rank", default=None, type=int, help='Distributed rank. This is an INTERNAL ARGUMENT! '
                                                                      'Only the launch utility should set this argument!')
     # I added
-    parser.add_argument("--save_weights", default=None, type=str, choices=['timed', 'untimed'])
+    parser.add_argument("--save_weights", default='untimed', type=str, choices=['timed', 'untimed'])
     parser.add_argument("--only_clean_training", action='store_true')
     parser.add_argument("--load_model", default=None, type=str, help='Load an already trained model from a  .pth file '
                                                                      'to continue training on')
-    parser.add_argument("--constantlr", action='store_true')
     parser.add_argument("--save_epoch", default=None, type=int, help='Epoch to save the model at')
 
     return parser

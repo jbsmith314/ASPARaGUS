@@ -38,6 +38,7 @@ def get_features(model, data, poison_delta):
     feature_extractor = torch.nn.Sequential(*(layer_cake[:-1]), torch.nn.Flatten())
     with torch.no_grad():
         for i, (img, target, idx) in enumerate(data.trainset):
+            print(i)
             lookup = data.poison_lookup.get(idx)
             if lookup is not None and poison_delta is not None:
                 img += poison_delta[lookup, :, :, :]

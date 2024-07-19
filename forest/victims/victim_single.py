@@ -123,7 +123,7 @@ class _VictimSingle(_VictimBase):
                 else:
                     save_path = os.path.join(subfolder, 'poisoned_model')
                 print(f'Attempting to save weights as "{save_name}"')
-                torch.save(model.state_dict(), os.path.join(save_path, f'{save_name}')) # Save weights after every epoch
+                torch.save(self.model.state_dict(), os.path.join(save_path, f'{save_name}')) # Save weights after every epoch
                 end_time = time.time()
                 if self.args.save_weights == 'timed':
                     print(f'Took {str(datetime.timedelta(seconds=end_time - start_time))}')
