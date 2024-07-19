@@ -28,6 +28,6 @@ if __name__ == "__main__":
 	for index in range(len(all_weights1)):
 		abs_diff += abs(all_weights2[index] - all_weights1[index])
 
-	print(all_weights1)
+	print(all_weights1.tolist())
 	print(f'The absolute difference is {abs_diff} between the two models with a size of {len(all_weights1)} parameters')
 	print(f'This is an average change of {abs_diff / len(all_weights1)} for each weight')
