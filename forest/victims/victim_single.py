@@ -107,7 +107,7 @@ class _VictimSingle(_VictimBase):
 
         single_setup = (self.model, self.defs, self.optimizer, self.scheduler)
 
-        for self.epoch in range(self.scheduler.last_epoch, max_epoch + self.scheduler.last_epoch):
+        for self.epoch in range(self.args.start_from, max_epoch + self.args.start_from):
             if self.epoch == self.args.save_epoch:
                 subfolder = self.args.modelsave_path
                 clean_path = os.path.join(subfolder, 'clean_model')
