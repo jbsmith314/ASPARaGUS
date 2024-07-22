@@ -169,7 +169,7 @@ def run_step(kettle, poison_delta, epoch, stats, model, defs, optimizer, schedul
 
     current_lr = optimizer.param_groups[0]['lr']
 
-    print_and_save_stats(epoch, stats, current_lr, epoch_loss / (batch + 1), correct_preds / total_preds,
+    print_and_save_stats(epoch + kettle.args.start_from, stats, current_lr, epoch_loss / (batch + 1), correct_preds / total_preds,
                          predictions, valid_loss,
                          target_acc, target_loss, target_clean_acc, target_clean_loss)
 
@@ -321,7 +321,7 @@ def get_optimizers(model, args, defs):
     if args.load_model is not None:
         optimizer.load_state_dict(torch.load(args.load_model)['optimizer'])
         scheduler.load_state_dict(torch.load(args.load_model)['scheduler'])
-        print("Loading optimizer with state dict: ", optimizer.state_dict())
-        print("Loading scheduler with state dict: ", scheduler.state_dict())
+        # print("Loading optimizer with state dict: ", optimizer.state_dict())
+        # print("Loading scheduler with state dict: ", scheduler.state_dict())
 
     return optimizer, scheduler

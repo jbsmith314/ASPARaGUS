@@ -1,6 +1,5 @@
 """Utilites related to training models."""
 
-
 def print_and_save_stats(epoch, stats, current_lr, train_loss, train_acc, predictions, valid_loss,
                          target_acc, target_loss, target_clean_acc, target_clean_loss):
     """Print info into console and into the stats object."""
