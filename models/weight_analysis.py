@@ -45,6 +45,10 @@ if __name__ == "__main__":
         diff_of_diffs += abs(expected_diffs[index] - actual_diffs[index])
 
     end_time = time.time()
-    print(f'The absolute difference is {diff_of_diffs} between the two models with a size of {len(all_weights1)} parameters')
-    print(f'This is an average change of {diff_of_diffs / len(all_weights1)} for each weight')
-    print(f'Took {end_time - start_time} seconds')
+
+    if True:
+        print(diff_of_diffs)
+    else:
+        print(f'The absolute difference is {diff_of_diffs} between the two models with a size of {len(all_weights1)} parameters')
+        print(f'This is an average change of {diff_of_diffs / len(all_weights1)} for each weight')
+        print(f'Took {end_time - start_time} seconds')
