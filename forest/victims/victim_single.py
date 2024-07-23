@@ -116,6 +116,7 @@ class _VictimSingle(_VictimBase):
                     sub_path = os.path.join(subfolder, 'poisoned_model')
                 state = {'epoch': self.epoch + 1, 'state_dict': self.model.state_dict(), 'optimizer': self.optimizer.state_dict(), 'scheduler': self.scheduler.state_dict()}
                 torch.save(state, os.path.join(sub_path, f'full_epoch_{self.epoch + self.args.start_from}.pth'))
+            poison_delta = None # ----------------------------------------------------------
             self._step(kettle, poison_delta, self.epoch, stats, *single_setup, pretraining_phase)
             if self.args.save_weights is not None:
                 start_time = time.time()
