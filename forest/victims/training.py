@@ -317,7 +317,7 @@ def get_optimizers(model, args, defs):
 
         # Example: epochs=160 leads to drops at 60, 100, 140.
 
-
+#@@@ This loads the schedule and optimizer 
     if args.load_model is not None:
         optimizer.load_state_dict(torch.load(args.load_model)['optimizer'])
         scheduler.load_state_dict(torch.load(args.load_model)['scheduler'])
