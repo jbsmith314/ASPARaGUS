@@ -95,11 +95,13 @@ class _VictimBase:
 
     """ METHODS FOR (CLEAN) TRAINING AND TESTING OF BREWED POISONS"""
 
-    def train(self, kettle, max_epoch=None):
+    def train(self, kettle, max_epoch=None, start_epoch=0, stats_clean=None):
         """Clean (pre)-training of the chosen model, no poisoning involved."""
         print('Starting clean training ...')
         stats_clean = self._iterate(kettle, poison_delta=None, max_epoch=max_epoch,
-                                    pretraining_phase=True if self.args.pretrain_dataset is not None else False)
+                                    pretraining_phase=True if self.args.pretrain_dataset is not None else False,
+                                    start_epoch=start_epoch,
+                                    stats=stats_clean if stats_clean is not None else None)
 
         if self.args.scenario in ['transfer', 'finetuning']:
             self.save_feature_representation()

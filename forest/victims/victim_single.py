@@ -98,16 +98,17 @@ class _VictimSingle(_VictimBase):
 
     """ METHODS FOR (CLEAN) TRAINING AND TESTING OF BREWED POISONS"""
 
-    def _iterate(self, kettle, poison_delta, max_epoch=None, pretraining_phase=False):
+    def _iterate(self, kettle, poison_delta, max_epoch=None, pretraining_phase=False, start_epoch=0, stats=None):
         """Validate a given poison by training the model and checking target accuracy."""
-        stats = defaultdict(list)
+        if stats == None:
+            stats = defaultdict(list)
 
         if max_epoch is None:
             max_epoch = self.defs.epochs
 
         single_setup = (self.model, self.defs, self.optimizer, self.scheduler)
 
-        for self.epoch in range(max_epoch):
+        for self.epoch in range(start_epoch, max_epoch + start_epoch):
             if self.epoch + self.args.start_from == self.args.save_epoch:
                 subfolder = self.args.modelsave_path
                 if poison_delta is None:
