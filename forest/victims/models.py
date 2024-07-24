@@ -20,11 +20,13 @@ def get_model(model_name, dataset_name, pretrained=False, load_model=False):
         if 'ResNet' in model_name:
             model = resnet_picker(model_name, dataset_name)
             if load_model:
+                #@@@ had to adapt safed state_dict by removing "module..." from each dict key
                 state_dict = torch.load(load_model)['state_dict']
                 new_state_dict = OrderedDict()
                 for k, v in state_dict.items():
                     name = k[7:] # remove module. from the start of each key
                     new_state_dict[name] = v
+                #@@@ loads the model from a file
                 model.load_state_dict(new_state_dict)
                 return model
         elif 'efficientnet-b' in model_name.lower():

@@ -109,16 +109,17 @@ class _VictimSingle(_VictimBase):
         single_setup = (self.model, self.defs, self.optimizer, self.scheduler)
 
         for self.epoch in range(start_epoch, max_epoch + start_epoch):
+            #@@@ in self._step is where accuracy info is saved
+            self._step(kettle, poison_delta, self.epoch, stats, *single_setup, pretraining_phase)
             if self.epoch + self.args.start_from == self.args.save_epoch:
                 subfolder = self.args.modelsave_path
                 if poison_delta is None:
                     sub_path = os.path.join(subfolder, 'clean_model')
                 else:
                     sub_path = os.path.join(subfolder, 'poisoned_model')
+                    #@@@ this is where we save the weights, etc where we want to be able to resume training
                 state = {'epoch': self.epoch + 1, 'state_dict': self.model.state_dict(), 'optimizer': self.optimizer.state_dict(), 'scheduler': self.scheduler.state_dict()}
                 torch.save(state, os.path.join(sub_path, f'full_epoch_{self.epoch + self.args.start_from}.pth'))
-            poison_delta = None # ----------------------------------------------------------
-            self._step(kettle, poison_delta, self.epoch, stats, *single_setup, pretraining_phase)
             if self.args.save_weights is not None:
                 start_time = time.time()
                 save_name = f'epoch_{self.epoch + self.args.start_from}.pth'
