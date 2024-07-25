@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
 	abs_diff = 0
 	for index in range(len(all_weights1)):
-		abs_diff += abs(all_weights2[index] - all_weights1[index])
+		abs_diff += (abs(all_weights2[index] - all_weights1[index]))**2
 
 	end_time = time.time()
 	print(abs_diff)
