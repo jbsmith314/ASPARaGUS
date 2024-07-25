@@ -36,3 +36,4 @@ python3 ../weight_analysis.py poisoned_model/epoch_34.pth poisoned_model/epoch_3
 python3 ../weight_analysis.py poisoned_model/epoch_35.pth poisoned_model/epoch_36.pth poisoned_model/epoch_37.pth
 python3 ../weight_analysis.py poisoned_model/epoch_36.pth poisoned_model/epoch_37.pth poisoned_model/epoch_38.pth
 python3 ../weight_analysis.py poisoned_model/epoch_37.pth poisoned_model/epoch_38.pth poisoned_model/epoch_39.pth
+python3 ../weight_analysis.py poisoned_model/epoch_38.pth poisoned_model/epoch_39.pth poisoned_model/epoch_40.pth

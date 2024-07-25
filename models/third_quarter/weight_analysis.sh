@@ -36,3 +36,4 @@ python3 ../weight_analysis.py clean_model/epoch_34.pth clean_model/epoch_35.pth 
 python3 ../weight_analysis.py clean_model/epoch_35.pth clean_model/epoch_36.pth clean_model/epoch_37.pth
 python3 ../weight_analysis.py clean_model/epoch_36.pth clean_model/epoch_37.pth clean_model/epoch_38.pth
 python3 ../weight_analysis.py clean_model/epoch_37.pth clean_model/epoch_38.pth clean_model/epoch_39.pth
+python3 ../weight_analysis.py clean_model/epoch_38.pth clean_model/epoch_39.pth clean_model/epoch_40.pth
