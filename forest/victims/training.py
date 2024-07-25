@@ -96,6 +96,7 @@ def run_step(kettle, poison_delta, epoch, stats, model, defs, optimizer, schedul
             def criterion(outputs, labels):
                 return kettle.mixer.corrected_loss(outputs, extra_labels, lmb=mixing_lmb, loss_fn=loss_fn)
         else:
+            # @@@ this is where we get model accuracy estimates
             def criterion(outputs, labels):
                 loss = loss_fn(outputs, labels)
                 predictions = torch.argmax(outputs.data, dim=1)

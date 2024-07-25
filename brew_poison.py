@@ -53,7 +53,6 @@ if __name__ == "__main__":
         stats_clean = None
     else:
         stats_clean = model.train(data, max_epoch=args.max_epoch)
-        stats_clean = model.train(data, max_epoch=args.max_epoch, start_epoch=2, stats_clean=stats_clean)
     train_time = time.time()
     if args.only_clean_training:
         sys.exit()
