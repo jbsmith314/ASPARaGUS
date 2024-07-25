@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     count = 0
     for index in range(len(all_weights1)):
-        if abs(expected_diffs[index]) < abs(actual_diffs[index]):
+        if expected_diffs[index] * actual_diffs[index] < 0:
             count += 1
 
     end_time = time.time()
