@@ -24,4 +24,4 @@
 
 # A lot
 python3 brew_poison.py --poisonkey 0 --modelkey 0 --deterministic --optimization basic --only_clean_training --epochs 100                                                                                  --modelsave_path models/higher_budget/a_lot          --save_epoch 99  --lr 0.01 --targets 1000 --recipe patch                  --save_weights timed --budget 0.1
-python3 brew_poison.py --poisonkey 0 --modelkey 0 --deterministic --optimization basic --skip_clean_training --epochs 10  --load_model models/higher_budget/a_lot/clean_model/full_epoch_29.pth            --modelsave_path models/higher_budget/a_lot          --save_epoch 109 --lr 0.01 --targets 1000 --recipe patch --start_from 100 --save_weights timed --budget 0.1
+python3 brew_poison.py --poisonkey 0 --modelkey 0 --deterministic --optimization basic --skip_clean_training --epochs 10  --load_model models/higher_budget/a_lot/clean_model/full_epoch_99.pth            --modelsave_path models/higher_budget/a_lot          --save_epoch 109 --lr 0.01 --targets 1000 --recipe patch --start_from 100 --save_weights timed --budget 0.1
