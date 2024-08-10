@@ -42,6 +42,7 @@ def main():
 			buckets[0] += 1
 		else:
 			other += 1
+			
 
 	end_time = time.time()
 	print("Buckets:", buckets)
