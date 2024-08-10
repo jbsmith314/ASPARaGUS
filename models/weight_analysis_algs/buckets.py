@@ -26,20 +26,19 @@ def main():
 			all_weights1 += weights1
 			all_weights2 += weights2
 
-	abs_diff = 0
 	buckets = [0, 0, 0, 0, 0]
 	other = 0
 	for index in range(len(all_weights1)):
-		abs_diff += abs(all_weights2[index] - all_weights1[index])
-		if abs_diff < 0.01:
+		abs_diff = abs(all_weights2[index] - all_weights1[index])
+		if abs_diff < 0.00001:
 			buckets[4] += 1
-		elif abs_diff < 0.1:
+		elif abs_diff < 0.0001:
 			buckets[3] += 1
-		elif abs_diff < 0.3:
+		elif abs_diff < 0.001:
 			buckets[2] += 1
-		elif abs_diff < 0.5:
+		elif abs_diff < 0.01:
 			buckets[1] += 1
-		elif abs_diff < 1:
+		elif abs_diff < 0.1:
 			buckets[0] += 1
 		else:
 			other += 1
