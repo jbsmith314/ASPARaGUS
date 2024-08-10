@@ -42,11 +42,15 @@ if __name__ == "__main__":
     for index in range(len(all_weights1)):
         actual_diffs.append(all_weights3[index] - all_weights2[index])
 
-    count = 0
+    diff_of_diffs = 0
     for index in range(len(all_weights1)):
-        if expected_diffs[index] * actual_diffs[index] < 0:
-            count += 1
+        diff_of_diffs += abs(expected_diffs[index] - actual_diffs[index])
 
     end_time = time.time()
 
-    print(count)
+    if True:
+        print(diff_of_diffs)
+    else:
+        print(f'The absolute difference is {diff_of_diffs} between the two models with a size of {len(all_weights1)} parameters')
+        print(f'This is an average change of {diff_of_diffs / len(all_weights1)} for each weight')
+        print(f'Took {end_time - start_time} seconds')
