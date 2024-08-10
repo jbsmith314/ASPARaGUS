@@ -10,7 +10,7 @@ def reduce_dimension(weights1, weights2):
 		reduced2 += weights2[index]
 	return reduced1, reduced2
 
-if __name__ == "__main__":
+def main():
 	start_time = time.time()
 
 	model1 = torch.load(sys.argv[1])
@@ -27,10 +27,32 @@ if __name__ == "__main__":
 			all_weights2 += weights2
 
 	abs_diff = 0
+	buckets = [0, 0, 0, 0, 0]
+	other = 0
 	for index in range(len(all_weights1)):
 		abs_diff += abs(all_weights2[index] - all_weights1[index])
+		if abs_diff < 0.00001:
+			buckets[4] += 1
+		elif abs_diff < 0.0001:
+			buckets[3] += 1
+		elif abs_diff < 0.001:
+			buckets[2] += 1
+		elif abs_diff < 0.01:
+			buckets[1] += 1
+		elif abs_diff < 0.1:
+			buckets[0]
+		else:
+			other += 1
+			
 
 	end_time = time.time()
+	print("Buckets:", buckets)
+	print("Other:", other)
+	print(f'Took {end_time - start_time} seconds')
+	return
+
 	print(f'The absolute difference is {abs_diff} between the two models with a size of {len(all_weights1)} parameters')
 	print(f'This is an average change of {abs_diff / len(all_weights1)} for each weight')
-	print(f'Took {end_time - start_time} seconds')
+
+if __name__ == "__main__":
+	main()
