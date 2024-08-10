@@ -40,7 +40,7 @@ def main():
 		elif abs_diff < 0.01:
 			buckets[1] += 1
 		elif abs_diff < 0.1:
-			buckets[0]
+			buckets[0] += 1
 		else:
 			other += 1
 			
