@@ -31,6 +31,7 @@ if __name__ == "__main__":
 		abs_diff += abs(all_weights2[index] - all_weights1[index])
 
 	end_time = time.time()
-	print(f'The absolute difference is {abs_diff} between the two models with a size of {len(all_weights1)} parameters')
-	print(f'This is an average change of {abs_diff / len(all_weights1)} for each weight')
-	print(f'Took {end_time - start_time} seconds')
+	print(abs_diff)
+	# print(f'The absolute difference is {abs_diff} between the two models with a size of {len(all_weights1)} parameters')
+	# print(f'This is an average change of {abs_diff / len(all_weights1)} for each weight')
+	# print(f'Took {end_time - start_time} seconds')
